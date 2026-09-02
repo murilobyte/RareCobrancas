@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Rare Cobranças — Cobrança que recupera crédito sem custar cliente</title>
+    <meta
+      name="description"
+      content="Assessoria de cobrança que recupera crédito preservando a relação com o cliente. Diagnóstico de carteira, régua de contato documentada e relatório mensal de performance e conduta."
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Rare Cobranças" />
+    <meta
+      property="og:title"
+      content="Rare Cobranças — Cobrança que recupera crédito sem custar cliente"
+    />
+    <meta
+      property="og:description"
+      content="Recuperamos crédito sem queimar a sua marca. Diagnóstico de carteira gratuito e sem compromisso."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#0d00a4" />
+
+    <link rel="icon" type="image/svg+xml" href="src/svg/logo2.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=PT+Serif:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=PT+Serif:wght@400;700&display=swap"
+    />
+
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Runs before first paint: marks that the reveal system will take over, so
+         elements can start hidden. If scripts fail, everything stays visible. -->
+    <script>
+      document.documentElement.classList.add('js-ready');
+    </script>
+  </head>
+
+  <body>
+    <!-- ==================================================================
+         Preloader
+    =================================================================== -->
+    <div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Carregando">
+      <div class="preloader__logo" id="preloader-logo">
+        <svg viewBox="0 0 73 73" fill="none" aria-hidden="true" focusable="false">
+          <path
+            id="preloader-path"
+            d="M32.6508 6.01855C37.0773 6.01857 40.951 6.68278 44.2709 8.01074C47.5906 9.33873 50.1637 11.3859 51.9896 14.1523C53.8155 16.9189 54.7279 20.4882 54.7279 24.8594V26.1875C54.7279 30.5584 53.7877 34.1271 51.9066 36.8936C50.2459 39.4098 47.9653 41.3281 45.0687 42.6543L60.1234 66.9395H50.2465L20.9476 19.2559V66.9395H12.8138V6.01855H32.6508ZM40.9818 36.0615C42.672 35.0267 43.9897 33.6451 44.934 31.9141C45.9299 30.0328 46.4281 27.9026 46.4281 25.5234C46.4281 23.1441 45.9299 21.0408 44.934 19.2148C43.938 17.3338 42.5273 15.8676 40.7015 14.8164C38.8756 13.7098 36.6901 13.1563 34.1449 13.1562H26.7836L40.9818 36.0615Z"
+            fill="#fff"
+            stroke="#fff"
+            stroke-width="0.75"
+          />
+        </svg>
+      </div>
+      <span class="preloader__track">
+        <span class="preloader__bar" id="preloader-bar"></span>
+      </span>
+    </div>
+
+    <!-- ==================================================================
+         Header
+    =================================================================== -->
+    <header class="header" id="header">
+      <div class="shell header__inner">
+        <a class="header__brand" href="#top" aria-label="Rare Cobranças — início">
+          <img src="src/svg/logo1.svg" alt="Rare Cobranças" width="292" height="38" />
+        </a>
+
+        <nav class="header__nav" aria-label="Principal">
+          <ul>
+            <li><a href="#top">Início</a></li>
+            <li><a href="#metodo">Serviços</a></li>
+            <li><a href="#duvidas">Dúvidas</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </nav>
+
+        <a class="btn btn--primary header__cta" href="https://wa.me/5547991521735?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Rare%20Cobran%C3%A7as%20e%20gostaria%20de%20falar%20com%20o%20time." target="_blank" rel="noopener noreferrer">Fale conosco</a>
+
+        <button class="burger" type="button" id="menu-open" aria-label="Abrir menu" aria-expanded="false">
+          <span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile menu -->
+    <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+      <div class="shell menu__top">
+        <img src="src/svg/logo1.svg" alt="Rare Cobranças" width="292" height="38" />
+        <button class="menu__close" type="button" id="menu-close" aria-label="Fechar menu">&times;</button>
+      </div>
+      <nav class="shell menu__nav" aria-label="Principal">
+        <ul>
+          <li data-menu-item><a href="#top">Início</a></li>
+          <li data-menu-item><a href="#metodo">Serviços</a></li>
+          <li data-menu-item><a href="#duvidas">Dúvidas</a></li>
+          <li data-menu-item><a href="#contato">Contato</a></li>
+        </ul>
+        <a class="btn btn--primary menu__cta" data-menu-item href="https://wa.me/5547991521735?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Rare%20Cobran%C3%A7as%20e%20gostaria%20de%20falar%20com%20o%20time." target="_blank" rel="noopener noreferrer">Fale conosco</a>
+      </nav>
+    </div>
+
+    <main>
+      <!-- ==================================================================
+           1 — Hero
+      =================================================================== -->
+      <section class="hero" id="top" data-reveal-section data-reveal-immediate data-stagger="0.12">
+        <div class="shell">
+          <h1 class="t-display hero__title">
+            <span class="mask-line"><span>Cobrança que recupera</span></span>
+            <span class="mask-line"><span>crédito sem custar cliente.</span></span>
+          </h1>
+
+          <p class="t-body measure hero__lead" data-reveal>
+            A maioria das assessorias entrega uma taxa de recuperação. Nós entregamos duas coisas
+            ao mesmo tempo: o dinheiro de volta e a sua marca intacta.
+            <strong>Nesse mercado, fazer as duas coisas juntas é raro.</strong>
+          </p>
+
+          <div class="hero__actions" data-reveal>
+            <a class="btn btn--primary" href="https://wa.me/5547991521735?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Rare%20Cobran%C3%A7as%20e%20quero%20solicitar%20o%20diagn%C3%B3stico%20gratuito%20da%20minha%20carteira." target="_blank" rel="noopener noreferrer">Quero um diagnóstico</a>
+            <a class="btn btn--ghost" href="#metodo">Ver como trabalhamos</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           2 — O problema
+      =================================================================== -->
+      <section class="problem on-dark" id="problema" data-reveal-section>
+        <div class="shell problem__grid">
+          <!-- Bleeds past the container to the left viewport edge on desktop. -->
+          <div class="problem__media" id="problem-media">
+            <picture>
+              <source
+                type="image/webp"
+                srcset="src/img/portrait-problem-640.webp 640w, src/img/portrait-problem-1280.webp 1280w"
+                sizes="(min-width: 1024px) 620px, 100vw"
+              />
+              <img
+                id="problem-image"
+                src="src/img/portrait-problem-640.webp"
+                alt="Executivo de braços cruzados em frente à fachada de vidro de um edifício comercial"
+                width="640"
+                height="925"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+          </div>
+
+          <div class="problem__body">
+            <p class="t-eyebrow" data-reveal>O custo que ninguém coloca na planilha</p>
+
+            <h2 class="t-display-dark problem__title">
+              <span class="mask-line"><span>Cobrança mal feita</span></span>
+              <span class="mask-line"><span>custa mais caro que</span></span>
+              <span class="mask-line"><span>a dívida.</span></span>
+            </h2>
+
+            <div class="problem__copy">
+              <p class="t-body-light" data-reveal>
+                Quando a cobrança é agressiva, três contas chegam depois, e nenhuma delas aparece
+                no relatório de recuperação. A primeira é o cliente que não volta: o devedor de
+                hoje é, na maioria dos casos, um cliente ativo em recuperação, e uma ligação
+                constrangedora encerra uma relação que levou anos para ser construída.
+              </p>
+              <p class="t-body-light" data-reveal>
+                A segunda é a reclamação pública, porque uma abordagem indevida vira avaliação
+                negativa, print em rede social e registro em plataforma de reputação. A cobrança é
+                terceirizada; a reputação, não. A terceira é o passivo jurídico: os artigos 42 e 71
+                do Código de Defesa do Consumidor não distinguem quem executou a cobrança, e quem
+                responde é a empresa credora.
+              </p>
+            </div>
+
+            <div class="problem__action" data-reveal>
+              <a class="btn btn--primary" href="https://wa.me/5547991521735?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Rare%20Cobran%C3%A7as%20e%20quero%20solicitar%20o%20diagn%C3%B3stico%20gratuito%20da%20minha%20carteira." target="_blank" rel="noopener noreferrer">Quero um diagnóstico</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           3 — A virada
+      =================================================================== -->
+      <section class="turn" id="virada" data-reveal-section>
+        <div class="shell turn__grid">
+          <div class="turn__body">
+            <h2 class="t-display turn__title">
+              <span class="mask-line"><span>Existe um jeito de</span></span>
+              <span class="mask-line"><span>cobrar que funciona</span></span>
+              <span class="mask-line"><span>melhor</span></span>
+            </h2>
+
+            <div class="turn__copy">
+              <p class="t-body" data-reveal>
+                Não é uma questão de simpatia.<br />É uma questão de conversão.
+              </p>
+              <p class="t-body" data-reveal>
+                Pressão gera acordo assinado. Clareza gera acordo cumprido. São coisas diferentes,
+                e só uma delas vira caixa.
+              </p>
+              <p class="t-body" data-reveal>
+                Quando o devedor entende exatamente o que deve, por quê, e recebe uma condição que
+                cabe no orçamento real dele, três coisas acontecem:
+                <strong>ele responde mais, ele fecha mais e ele paga até o fim.</strong>
+              </p>
+              <p class="t-body" data-reveal>
+                <strong>A Rare foi construída inteira em torno dessa constatação.</strong>
+              </p>
+            </div>
+          </div>
+
+          <!-- Sits slightly proud of the text block — deliberate misalignment. -->
+          <div class="turn__media" id="turn-media">
+            <picture>
+              <source
+                type="image/webp"
+                srcset="src/img/portrait-turn-520.webp 520w, src/img/portrait-turn-1040.webp 1040w"
+                sizes="(min-width: 1024px) 460px, 100vw"
+              />
+              <img
+                id="turn-image"
+                src="src/img/portrait-turn-520.webp"
+                alt="Profissional sorrindo enquanto conversa ao lado de uma janela em um escritório"
+                width="520"
+                height="670"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           4 — Método (pinned)
+      =================================================================== -->
+      <section class="method on-dark" id="metodo" data-reveal-section>
+        <div class="method__bloom" aria-hidden="true"></div>
+
+        <div class="shell method__grid">
+          <div class="method__head">
+            <p class="t-eyebrow" data-reveal>Método</p>
+            <h2 class="t-display-dark method__title">
+              <span class="mask-line"><span>Quatro etapas.</span></span>
+              <span class="mask-line"><span>Nenhuma delas</span></span>
+              <span class="mask-line"><span>no improviso.</span></span>
+            </h2>
+          </div>
+
+          <!-- Desktop: the four panels share one grid cell and cross-fade in
+               place. Mobile: the same list, stacked and revealed one by one. -->
+          <div class="method__stage">
+            <ol class="method__steps" id="method-steps">
+              <li>
+                <div class="method__panel">
+                  <p class="t-eyebrow">
+                    <span class="method__num">01</span>Diagnóstico da carteira
+                  </p>
+                  <p class="t-body-light">
+                    Antes de qualquer contato, segmentamos sua base por perfil de recuperabilidade,
+                    aging e histórico. Nem toda dívida se cobra do mesmo jeito, e nem toda dívida
+                    vale o mesmo esforço.
+                  </p>
+                  <p class="t-body-light method__delivery">
+                    Entrega: mapa da carteira com prioridade de abordagem e potencial estimado de
+                    recuperação.
+                  </p>
+                </div>
+              </li>
+              <li>
+                <div class="method__panel">
+                  <p class="t-eyebrow"><span class="method__num">02</span>Régua e canais</p>
+                  <p class="t-body-light">
+                    Definimos o canal, a frequência e o horário por perfil. Começamos pelos canais
+                    assíncronos, onde o devedor decide quando responder, e onde a taxa de resposta
+                    é maior.
+                  </p>
+                  <p class="t-body-light method__delivery">
+                    Entrega: régua de contato documentada e aprovada por você antes de entrar em
+                    produção.
+                  </p>
+                </div>
+              </li>
+              <li>
+                <div class="method__panel">
+                  <p class="t-eyebrow"><span class="method__num">03</span>Negociação</p>
+                  <p class="t-body-light">
+                    Toda proposta é apresentada com valor original, encargos e valor final
+                    discriminados. Quando a condição padrão não cabe, negociamos uma que caiba,
+                    dentro dos limites que você definiu.
+                  </p>
+                  <p class="t-body-light method__delivery">
+                    Entrega: acordos formalizados, com registro auditável de cada contato.
+                  </p>
+                </div>
+              </li>
+              <li>
+                <div class="method__panel">
+                  <p class="t-eyebrow"><span class="method__num">04</span>Reporte e ajuste</p>
+                  <p class="t-body-light">
+                    Você acompanha a operação com dados abertos. Todo mês revisamos o que
+                    converteu, o que não converteu e o que muda no ciclo seguinte.
+                  </p>
+                  <p class="t-body-light method__delivery">
+                    Entrega: relatório mensal de performance e de conduta.
+                  </p>
+                </div>
+              </li>
+            </ol>
+
+            <!-- Desktop step counter; on mobile each step carries its own number. -->
+            <div class="method__counter" id="method-counter" aria-hidden="true">
+              <span>01</span><span>02</span><span>03</span><span>04</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="method__rail" aria-hidden="true">
+          <span class="method__progress" id="method-progress"></span>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           5 — Diferenciais
+      =================================================================== -->
+      <section class="diff" id="diferenciais" data-reveal-section>
+        <div class="shell">
+          <h2 class="t-display diff__title">
+            <span class="mask-line"><span>O que você recebe além</span></span>
+            <span class="mask-line"><span>do valor recuperado.</span></span>
+          </h2>
+
+          <div class="measure diff__copy">
+            <p class="t-body" data-reveal>
+              Toda ligação é gravada e toda mensagem é registrada, com data, hora, canal e
+              conteúdo. Se alguém questionar como sua empresa cobrou, existe resposta documentada.
+            </p>
+            <p class="t-body" data-reveal>
+              Por isso nosso relatório mensal vai além de recuperação e ticket médio: reportamos
+              taxa de reclamação, aderência a horário permitido e incidentes de dados, com
+              tratamento de dados pessoais em conformidade com a LGPD. E acompanhamos a taxa de
+              cumprimento, não apenas a de fechamento, porque o objetivo não é fechar o acordo. É
+              devolver o cliente regularizado.
+            </p>
+          </div>
+
+          <div class="diff__action" data-reveal>
+            <a class="btn btn--primary" href="https://wa.me/5547991521735?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Rare%20Cobran%C3%A7as%20e%20quero%20solicitar%20o%20diagn%C3%B3stico%20gratuito%20da%20minha%20carteira." target="_blank" rel="noopener noreferrer">Quero um diagnóstico</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           6 — FAQ
+      =================================================================== -->
+      <section class="faq" id="duvidas" data-reveal-section>
+        <div class="shell">
+          <h2 class="t-display faq__title">
+            <span class="mask-line"><span>Perguntas que</span></span>
+            <span class="mask-line"><span>sempre nos fazem.</span></span>
+          </h2>
+
+          <div class="faq__list" id="faq" data-reveal>
+            <div class="faq__item">
+              <h3>
+                <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-p1" id="faq-b1">
+                  <span>Cobrança respeitosa recupera menos?</span>
+                  <span class="faq__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq__panel" id="faq-p1" role="region" aria-labelledby="faq-b1">
+                <div>
+                  <p class="t-body">
+                    Não. Recupera diferente. Acordo fechado sob pressão tem taxa de quebra alta, e
+                    acordo quebrado não vira caixa. Trabalhamos a taxa de cumprimento, que é a
+                    métrica que realmente mede dinheiro recebido, e não apenas a de fechamento.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq__item">
+              <h3>
+                <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-p2" id="faq-b2">
+                  <span>Como funciona a remuneração?</span>
+                  <span class="faq__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq__panel" id="faq-p2" role="region" aria-labelledby="faq-b2">
+                <div>
+                  <p class="t-body">
+                    Trabalhamos por êxito, com percentual acordado sobre o valor efetivamente
+                    recuperado. Sem mensalidade fixa e sem taxa de implantação. Se não recuperamos,
+                    você não paga.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq__item">
+              <h3>
+                <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-p3" id="faq-b3">
+                  <span>Vocês integram com o nosso sistema?</span>
+                  <span class="faq__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq__panel" id="faq-p3" role="region" aria-labelledby="faq-b3">
+                <div>
+                  <p class="t-body">
+                    Sim. Recebemos a carteira por integração via API ou por importação de arquivo,
+                    no formato que o seu ERP já exporta. A definição do fluxo de dados faz parte do
+                    diagnóstico, antes de qualquer contato com o devedor.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq__item">
+              <h3>
+                <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-p4" id="faq-b4">
+                  <span>Qual o tamanho mínimo de carteira?</span>
+                  <span class="faq__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq__panel" id="faq-p4" role="region" aria-labelledby="faq-b4">
+                <div>
+                  <p class="t-body">
+                    Não trabalhamos com um piso rígido. O diagnóstico mostra se o volume e o perfil
+                    da sua carteira justificam a operação. Quando não justificam, dizemos isso, e
+                    você recebe o diagnóstico do mesmo jeito.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq__item">
+              <h3>
+                <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-p5" id="faq-b5">
+                  <span>E os dados dos nossos clientes?</span>
+                  <span class="faq__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq__panel" id="faq-p5" role="region" aria-labelledby="faq-b5">
+                <div>
+                  <p class="t-body">
+                    Tratamos dados pessoais na condição de operadores, em conformidade com a LGPD,
+                    sob contrato específico de tratamento. Acesso restrito e registrado, retenção
+                    definida em contrato e devolução ou eliminação ao fim da operação.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq__item">
+              <h3>
+                <button type="button" class="faq__q" aria-expanded="false" aria-controls="faq-p6" id="faq-b6">
+                  <span>Em quanto tempo começa a operar?</span>
+                  <span class="faq__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq__panel" id="faq-p6" role="region" aria-labelledby="faq-b6">
+                <div>
+                  <p class="t-body">
+                    O diagnóstico da carteira leva poucos dias após o recebimento da base. A régua
+                    entra em produção somente depois da sua aprovação, e não antes.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq__action" data-reveal>
+            <a class="btn btn--primary" href="https://wa.me/5547991521735?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Rare%20Cobran%C3%A7as%20e%20fiquei%20com%20uma%20d%C3%BAvida%20sobre%20como%20voc%C3%AAs%20trabalham." target="_blank" rel="noopener noreferrer">Tenho mais dúvidas</a>
+            <p class="faq__whats">
+              <a class="link-quiet" href="https://wa.me/5547991521735?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Rare%20Cobran%C3%A7as%20e%20fiquei%20com%20uma%20d%C3%BAvida%20sobre%20como%20voc%C3%AAs%20trabalham." target="_blank" rel="noopener noreferrer">
+                Falar pelo WhatsApp
+              </a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           7 — CTA final
+      =================================================================== -->
+      <section class="cta on-blue" id="contato" data-reveal-section data-delay="0.25">
+        <div class="cta__panel" id="cta-panel">
+          <div class="shell">
+            <h2 class="t-display cta__title">
+              <span class="mask-line"><span>Comece pelo diagnóstico.</span></span>
+              <span class="mask-line"><span>Sem custo.</span></span>
+            </h2>
+
+            <p class="measure cta__lead" data-reveal>
+              Envie os dados abaixo e nós analisamos o perfil da sua carteira: composição por
+              aging, potencial estimado de recuperação e a abordagem que faz sentido para o seu
+              segmento. Você recebe o diagnóstico mesmo que decida não seguir conosco.
+            </p>
+
+            <div class="cta__action" data-reveal>
+              <a class="btn btn--invert" href="https://wa.me/5547991521735?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Rare%20Cobran%C3%A7as%20e%20gostaria%20de%20enviar%20minha%20carteira%20para%20an%C3%A1lise." target="_blank" rel="noopener noreferrer">
+                Analisar carteira
+              </a>
+              <p class="cta__whats">
+                <a class="link-quiet" href="https://wa.me/5547991521735?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Rare%20Cobran%C3%A7as%20e%20gostaria%20de%20enviar%20minha%20carteira%20para%20an%C3%A1lise." target="_blank" rel="noopener noreferrer">
+                  Falar pelo WhatsApp
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==================================================================
+         8 — Footer
+    =================================================================== -->
+    <footer class="footer on-dark" data-reveal-section>
+      <div class="shell">
+        <!-- Decorative: nearly fused with the background, and not announced. -->
+        <p class="footer__tagline" id="footer-tagline" aria-hidden="true">
+          Recuperar com rigor. Tratar com respeito
+        </p>
+
+        <div class="footer__grid">
+          <div data-reveal>
+            <img
+              class="footer__logo"
+              src="src/svg/logo2.svg"
+              alt="Rare Cobranças e Assessoria Empresarial Ltda"
+              width="562"
+              height="73"
+            />
+
+            <address class="footer__contact">
+              <a href="mailto:contato@rarecobranca.com.br">contato@rarecobranca.com.br</a>
+              <a href="tel:+5547991521735">+55 47 99152-1735</a>
+              <span>Rua sete de setembro, 105. 104</span>
+            </address>
+
+            <p class="footer__legal">
+              Rare Cobranças e Assessoria Empresarial Ltda<br />
+              CNPJ 48.071.723/0001-08<br />
+              Atividades de cobranças e informações cadastrais
+            </p>
+          </div>
+
+          <nav data-reveal aria-label="Navegação">
+            <h2 class="footer__col-title">Navegação</h2>
+            <ul class="footer__links">
+              <li><a href="#metodo">Como trabalhamos</a></li>
+              <li><a href="#problema">Para quem é</a></li>
+              <li><a href="#virada">O que fazemos</a></li>
+              <li><a href="#metodo">Como funciona</a></li>
+              <li><a href="#diferenciais">Diferenciais</a></li>
+              <li><a href="#duvidas">Dúvidas</a></li>
+              <li><a href="#diferenciais">Compliance e segurança</a></li>
+            </ul>
+          </nav>
+
+          <nav data-reveal aria-label="Soluções">
+            <h2 class="footer__col-title">Soluções</h2>
+            <ul class="footer__links">
+              <li><a href="#metodo">Recuperação de crédito</a></li>
+              <li><a href="#metodo">Análise cadastral</a></li>
+              <li><a href="#metodo">Assessoria para o contas a receber</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="footer__bottom" data-reveal>
+          <p>2026 Rare Cobranças. Todos os direitos reservados.</p>
+          <p>
+            <a href="#">Política de Privacidade</a>
+            <span aria-hidden="true"> · </span>
+            <a href="#">Termos de Uso</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="vendor/gsap.min.js"></script>
+    <script src="vendor/ScrollTrigger.min.js"></script>
+    <script src="vendor/CustomEase.min.js"></script>
+    <script src="vendor/lenis.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

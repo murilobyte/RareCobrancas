@@ -1,0 +1,9 @@
+{
+  "name": "rare-cobrancas",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Landing page da Rare Cobranças — HTML, CSS e JS, sem build.",
+  "scripts": {
+    "dev": "python3 -m http.server 4173"
+  }
+}

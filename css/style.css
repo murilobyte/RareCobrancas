@@ -1,0 +1,1109 @@
+/* ===========================================================================
+   Rare Cobranças — landing page
+   Sections appear in the same order as the markup in index.html.
+   =========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  background: var(--bone);
+  color: var(--text-dark);
+  font-family: var(--font-sans);
+  font-size: var(--size-body);
+  line-height: 1.6;
+}
+
+/* Set while the preloader or the mobile menu is on screen. */
+body[data-locked='true'] {
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+p,
+figure,
+ul,
+ol {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+::selection {
+  background: var(--blue);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.on-dark :focus-visible,
+.on-blue :focus-visible {
+  outline-color: #fff;
+}
+
+/* ---------------------------------------------------------------------------
+   Layout primitives
+--------------------------------------------------------------------------- */
+
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.measure {
+  max-width: var(--measure);
+  margin-inline: auto;
+}
+
+/* ---------------------------------------------------------------------------
+   Typography — two families, one semantic rule.
+   Serif -> headings on light sections (reflective register)
+   Sans  -> headings on dark sections (assertive register)
+--------------------------------------------------------------------------- */
+
+.t-display {
+  font-family: var(--font-serif);
+  font-size: var(--size-display);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.12;
+  color: var(--text-dark);
+}
+
+.t-display-dark {
+  font-family: var(--font-sans);
+  font-size: var(--size-display-dark);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.14;
+  color: #fff;
+}
+
+.t-eyebrow {
+  font-family: var(--font-serif);
+  font-size: var(--size-eyebrow);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-eyebrow);
+}
+
+.t-body {
+  font-size: var(--size-body);
+  line-height: 1.6;
+  color: var(--text-body-dark);
+}
+
+.t-body-light {
+  font-size: var(--size-body);
+  line-height: 1.6;
+  color: var(--text-body-light);
+}
+
+.t-body strong,
+.t-body-light strong {
+  font-weight: 600;
+}
+
+.t-body strong {
+  color: var(--text-dark);
+}
+
+.t-body-light strong {
+  color: #fff;
+}
+
+/* ---------------------------------------------------------------------------
+   Buttons — fully rounded pills, no heavy shadows.
+--------------------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 20px clamp(32px, 3.8vw, 54px);
+  border-radius: 9999px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  will-change: transform;
+  transition:
+    background-color 200ms var(--ease-apple),
+    color 200ms var(--ease-apple),
+    transform 200ms var(--ease-apple);
+}
+
+.btn:hover {
+  transform: scale(1.02);
+}
+
+.btn:active {
+  transform: scale(0.99);
+}
+
+.btn--primary {
+  background: var(--blue);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background: var(--blue-hover);
+}
+
+.btn--ghost {
+  background: #a9a9ad;
+  color: #fff;
+}
+
+.btn--ghost:hover {
+  background: #97979d;
+}
+
+.btn--invert {
+  background: #fff;
+  color: var(--blue);
+}
+
+.btn--invert:hover {
+  background: #ececf4;
+}
+
+.link-quiet {
+  display: inline-block;
+  padding: 6px 2px;
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  opacity: 0.85;
+  transition: opacity 200ms var(--ease-apple);
+}
+
+.link-quiet:hover {
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------------------------
+   Motion primitives
+--------------------------------------------------------------------------- */
+
+/* Line mask: the wrapper clips, the inner line rides up from below. */
+.mask-line {
+  display: block;
+  overflow: hidden;
+  /* Descenders (ç, g, q) would be clipped by a tight box, so pad then pull back. */
+  padding-bottom: 0.16em;
+  margin-bottom: -0.16em;
+}
+
+.mask-line > span {
+  display: block;
+  will-change: transform;
+}
+
+/* `js-ready` is set on <html> before first paint. If the scripts never run,
+   every section stays visible. */
+.js-ready [data-reveal] {
+  opacity: 0;
+}
+
+.js-ready .mask-line > span {
+  transform: translateY(105%);
+}
+
+/* ---------------------------------------------------------------------------
+   Preloader
+--------------------------------------------------------------------------- */
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  background: var(--blue);
+  will-change: transform;
+}
+
+.preloader__logo svg {
+  width: 64px;
+  height: 64px;
+}
+
+.preloader__track {
+  display: block;
+  width: 180px;
+  max-width: 45vw;
+  height: 1px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.preloader__bar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* ---------------------------------------------------------------------------
+   Header
+--------------------------------------------------------------------------- */
+
+.header {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 100;
+  height: var(--header-h);
+  background: var(--bone);
+  border-bottom: 1px solid transparent;
+  transition:
+    height var(--dur-ui) var(--ease-apple),
+    background-color var(--dur-ui) var(--ease-apple),
+    backdrop-filter var(--dur-ui) var(--ease-apple),
+    border-color var(--dur-ui) var(--ease-apple);
+}
+
+/* Frosts over and compacts once the page is scrolled, so a sticky bar at the
+   reference's full 124px does not eat the viewport. */
+.header.is-condensed {
+  height: 72px;
+  background: rgba(239, 240, 242, 0.72);
+  backdrop-filter: blur(20px);
+  border-bottom-color: var(--hairline);
+}
+
+.header__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 100%;
+}
+
+.header__brand {
+  flex-shrink: 0;
+}
+
+.header__brand img {
+  height: 29px;
+  width: auto;
+}
+
+/* Centred on the page, not between the logo and the button. */
+.header__nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+}
+
+.header__nav ul {
+  display: flex;
+  align-items: center;
+  gap: 74px;
+}
+
+.header__nav a {
+  font-size: 15px;
+  text-decoration: none;
+  transition: opacity 200ms var(--ease-apple);
+}
+
+.header__nav a:hover {
+  opacity: 0.6;
+}
+
+.header__cta {
+  display: none;
+  flex-shrink: 0;
+  padding: 15px 34px;
+  font-size: 14px;
+}
+
+.burger {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+}
+
+.burger span {
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--text-dark);
+}
+
+.burger span + span {
+  margin-top: 5px;
+}
+
+@media (min-width: 640px) {
+  .header__cta {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header__nav {
+    display: block;
+  }
+
+  .burger {
+    display: none;
+  }
+}
+
+/* Mobile menu ------------------------------------------------------------- */
+
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  background: var(--bone);
+}
+
+.menu__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  flex-shrink: 0;
+}
+
+.menu__top img {
+  height: 26px;
+  width: auto;
+}
+
+.menu__close {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.menu__nav {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.menu__nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.menu__nav a {
+  display: block;
+  padding: 4px 0;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 9vw, 3rem);
+  line-height: 1.12;
+  text-decoration: none;
+}
+
+.menu__cta {
+  align-self: flex-start;
+  margin-top: 48px;
+}
+
+/* ---------------------------------------------------------------------------
+   1 — Hero
+--------------------------------------------------------------------------- */
+
+.hero {
+  background: var(--bone);
+  padding-top: clamp(132px, 15.8vw, 228px);
+  padding-bottom: clamp(72px, 10vw, 136px);
+  text-align: center;
+}
+
+.hero__title {
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.hero__lead {
+  margin-top: clamp(28px, 4vw, 52px);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: clamp(36px, 5vw, 64px);
+}
+
+/* ---------------------------------------------------------------------------
+   2 — O problema
+--------------------------------------------------------------------------- */
+
+.problem {
+  background: var(--ink);
+  padding-block: var(--section-y);
+}
+
+.problem__grid {
+  display: grid;
+  gap: 48px;
+}
+
+.problem__media {
+  overflow: hidden;
+}
+
+.problem__media img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  object-position: center;
+  will-change: transform;
+}
+
+.problem__body {
+  display: flex;
+  flex-direction: column;
+}
+
+.problem__title {
+  margin-top: clamp(20px, 2.6vw, 36px);
+}
+
+.problem__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4em;
+  margin-top: clamp(32px, 4.4vw, 60px);
+}
+
+.problem__copy p {
+  max-width: 500px;
+}
+
+.problem__action {
+  margin-top: auto;
+  padding-top: clamp(40px, 6vw, 88px);
+}
+
+@media (min-width: 1024px) {
+  .problem__grid {
+    grid-template-columns: 42.5fr 57.5fr;
+    column-gap: clamp(40px, 5.6vw, 80px);
+    align-items: stretch;
+  }
+
+  /* Escapes the container to the left viewport edge. */
+  .problem__media {
+    margin-left: calc(-1 * var(--bleed-left));
+    width: calc(100% + var(--bleed-left));
+  }
+
+  .problem__media img {
+    height: 100%;
+    aspect-ratio: 1608 / 2324;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   3 — A virada
+--------------------------------------------------------------------------- */
+
+.turn {
+  background: var(--bone);
+  padding-block: var(--section-y);
+}
+
+.turn__grid {
+  display: grid;
+  gap: 48px;
+}
+
+.turn__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 1.85em;
+  margin-top: clamp(40px, 7.8vw, 112px);
+}
+
+.turn__copy p {
+  max-width: 520px;
+}
+
+.turn__media {
+  overflow: hidden;
+}
+
+.turn__media img {
+  width: 100%;
+  aspect-ratio: 1222 / 1574;
+  object-fit: cover;
+  transform: scale(1.08); /* headroom for the parallax drift */
+  will-change: transform;
+}
+
+@media (min-width: 1024px) {
+  .turn__grid {
+    grid-template-columns: 1.22fr 1fr;
+    column-gap: clamp(40px, 4.2vw, 60px);
+    align-items: start;
+  }
+
+  .turn__media {
+    margin-top: 6px;
+  }
+}
+
+/* Image above the text on small screens. */
+@media (max-width: 1023.98px) {
+  .turn__body {
+    order: 2;
+  }
+
+  .turn__media {
+    order: 1;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   4 — Método (pinned on desktop)
+--------------------------------------------------------------------------- */
+
+.method {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+  padding-block: var(--section-y);
+}
+
+/* Very diffuse blue-violet bloom in the lower-left corner. */
+.method__bloom {
+  position: absolute;
+  left: -25%;
+  bottom: -25%;
+  width: 70vw;
+  height: 70vh;
+  pointer-events: none;
+  opacity: 0.18;
+  background: radial-gradient(
+    circle at 30% 70%,
+    var(--blue) 0%,
+    rgba(13, 0, 164, 0.35) 38%,
+    transparent 70%
+  );
+}
+
+.method__grid {
+  position: relative;
+  display: grid;
+  gap: clamp(48px, 8vw, 96px);
+}
+
+.method__title {
+  margin-top: clamp(20px, 2.6vw, 36px);
+}
+
+.method__steps > li + li {
+  margin-top: 56px;
+}
+
+.method__num {
+  margin-right: 12px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
+.method__panel > .t-body-light {
+  margin-top: clamp(20px, 2.4vw, 32px);
+}
+
+.method__panel > .method__delivery {
+  margin-top: 1.4em;
+  font-style: italic;
+}
+
+.method__counter {
+  display: none;
+  align-items: center;
+  gap: 16px;
+  margin-top: 40px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--text-eyebrow);
+}
+
+.method__counter span:first-child {
+  color: #fff;
+}
+
+/* Progress rail, pinned to the bottom edge of the section. */
+.method__rail {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  display: none;
+  height: 1px;
+  background: var(--hairline-dark);
+}
+
+.method__progress {
+  display: block;
+  width: 100%;
+  height: 4px;
+  background: var(--blue);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+@media (min-width: 1024px) {
+  .method {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    min-height: 680px;
+    padding-block: 0;
+  }
+
+  .method__grid {
+    grid-template-columns: 1.42fr 1fr;
+    column-gap: clamp(40px, 5vw, 72px);
+  }
+
+  .method__stage {
+    margin-top: 14vh;
+  }
+
+  /* The four panels share one grid cell and cross-fade in place. */
+  .method__steps {
+    display: grid;
+    min-height: 300px;
+  }
+
+  .method__steps > li {
+    grid-area: 1 / 1;
+  }
+
+  .method__steps > li + li {
+    margin-top: 0;
+  }
+
+  .method__num {
+    display: none; /* the counter below carries the number instead */
+  }
+
+  .method__counter,
+  .method__rail {
+    display: flex;
+  }
+
+  .method__rail {
+    display: block;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   5 — Diferenciais
+--------------------------------------------------------------------------- */
+
+.diff {
+  background: var(--bone);
+  padding-block: var(--section-y);
+  text-align: center;
+}
+
+.diff__title {
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.diff__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 1.85em;
+  margin-top: clamp(28px, 4vw, 52px);
+}
+
+.diff__action {
+  margin-top: clamp(36px, 5vw, 64px);
+}
+
+/* ---------------------------------------------------------------------------
+   6 — FAQ
+--------------------------------------------------------------------------- */
+
+.faq {
+  background: var(--paper);
+  padding-block: var(--section-y);
+}
+
+.faq__title {
+  max-width: 900px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.faq__list {
+  max-width: var(--measure-faq);
+  margin: clamp(40px, 6vw, 84px) auto 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.faq__item {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.faq__q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  padding: 26px 0;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-dark);
+}
+
+/* A "+" that rotates into a "×". */
+.faq__icon {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  transition: transform 400ms var(--ease-out-soft);
+}
+
+.faq__icon::before,
+.faq__icon::after {
+  content: '';
+  position: absolute;
+  background: var(--text-eyebrow);
+}
+
+.faq__icon::before {
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  transform: translateY(-50%);
+}
+
+.faq__icon::after {
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 100%;
+  transform: translateX(-50%);
+}
+
+.faq__q[aria-expanded='true'] .faq__icon {
+  transform: rotate(45deg);
+}
+
+/* 0fr -> 1fr animates to the panel's real height, with no JS measuring. */
+.faq__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 400ms var(--ease-out-soft);
+}
+
+.faq__panel > div {
+  overflow: hidden;
+}
+
+.faq__panel p {
+  padding: 0 40px 28px 0;
+}
+
+/* The panel is a sibling of the <h3>, not of the button, so the open state is
+   carried by a class that the script keeps in sync with aria-expanded. */
+.faq__panel.is-open {
+  grid-template-rows: 1fr;
+}
+
+.faq__action {
+  margin-top: clamp(36px, 5vw, 64px);
+  text-align: center;
+}
+
+.faq__whats {
+  margin-top: 12px;
+  color: var(--text-body-dark);
+}
+
+/* ---------------------------------------------------------------------------
+   7 — CTA final
+--------------------------------------------------------------------------- */
+
+.cta {
+  background: var(--paper);
+}
+
+.cta__panel {
+  background: var(--blue);
+  padding-block: var(--section-y);
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.cta__title {
+  max-width: 900px;
+  margin-inline: auto;
+  color: #fff;
+}
+
+.cta__lead {
+  margin-top: clamp(28px, 4vw, 52px);
+  font-size: var(--size-body);
+  line-height: 1.6;
+}
+
+.cta__action {
+  margin-top: clamp(36px, 5vw, 64px);
+}
+
+.cta__whats {
+  margin-top: 12px;
+}
+
+/* ---------------------------------------------------------------------------
+   8 — Footer
+--------------------------------------------------------------------------- */
+
+.footer {
+  background: var(--ink);
+  padding-top: clamp(56px, 6vw, 84px);
+  padding-bottom: 40px;
+}
+
+/* Decorative, near-invisible; a light band sweeps across it on entry. */
+.footer__tagline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 4.05vw, 3.6rem);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  white-space: nowrap;
+  background-image: linear-gradient(
+    100deg,
+    #2e2e35 0%,
+    #2e2e35 34%,
+    #6f6f7b 50%,
+    #2e2e35 66%,
+    #2e2e35 100%
+  );
+  background-size: 300% 100%;
+  background-position: 100% 0%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.footer__grid {
+  display: grid;
+  gap: 56px 40px;
+  margin-top: clamp(56px, 8vw, 116px);
+}
+
+.footer__logo {
+  height: 46px;
+  width: auto;
+}
+
+.footer__contact {
+  display: flex;
+  flex-direction: column;
+  margin-top: 32px;
+  font-size: 15px;
+  font-style: normal;
+  line-height: 1.75;
+  color: var(--text-body-light);
+}
+
+.footer__contact a {
+  text-decoration: none;
+  transition: color 200ms var(--ease-apple);
+}
+
+.footer__contact a:hover {
+  color: #fff;
+}
+
+.footer__legal {
+  max-width: 300px;
+  margin-top: 40px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-eyebrow);
+}
+
+.footer__col-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.footer__links a {
+  font-size: 15px;
+  text-decoration: none;
+  color: var(--text-body-light);
+  transition: color 200ms var(--ease-apple);
+}
+
+.footer__links a:hover {
+  color: #fff;
+}
+
+.footer__bottom {
+  margin-top: clamp(64px, 9vw, 132px);
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--text-body-light);
+}
+
+.footer__bottom a {
+  transition: color 200ms var(--ease-apple);
+}
+
+.footer__bottom a:hover {
+  color: #fff;
+}
+
+@media (min-width: 1024px) {
+  .footer__grid {
+    grid-template-columns: 1.7fr 1fr 1fr;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Reduced motion — no pin, no parallax, no masks, everything visible.
+--------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .js-ready [data-reveal] {
+    opacity: 1 !important;
+  }
+
+  .js-ready .mask-line > span {
+    transform: none !important;
+  }
+
+  .btn:hover {
+    transform: none;
+  }
+
+  .turn__media img {
+    transform: none;
+  }
+
+  /* The pinned sequence is replaced by a plain stacked list. */
+  .method {
+    height: auto;
+    min-height: 0;
+    padding-block: var(--section-y);
+  }
+
+  .method__steps {
+    display: block;
+  }
+
+  .method__steps > li + li {
+    margin-top: 56px;
+  }
+
+  .method__num {
+    display: inline;
+  }
+
+  .method__counter,
+  .method__rail {
+    display: none;
+  }
+}
